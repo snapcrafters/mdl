@@ -22,14 +22,13 @@ distributions.</p>
 <!-- Uncomment and modify this when you have a screenshot
 ![my-snap-name](screenshot.png?raw=true "my-snap-name")
 -->
-e
 ## Usage
 
     cat file.md | mdl
     
 ## Known issues
 
-* Trying to run 'mdl <file>' will fail (permission error). Please use 'cat <file> | mdl' instead.
+* Trying to run `mdl <file>` will fail (permission error). Please use `cat <file> | mdl` instead.
 
 <p align="center">Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
 
