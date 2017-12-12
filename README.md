@@ -24,7 +24,7 @@ distributions.</p>
     
 ## Known issues
 
-* Trying to run `mdl <file>` will fail (permission error). Please use `cat <file> | mdl` instead.
+* Trying to run `mdl <file>` will fail (permission error). Please use `cat <file> | mdl` instead. *This problem doesn't occur when the file is located in home directory or on removable media.*
 
 <p align="center">Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
 
