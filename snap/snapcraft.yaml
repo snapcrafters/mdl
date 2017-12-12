@@ -3,24 +3,19 @@ version: "0.4.0"
 summary: Markdown lint tool
 description: |
   A tool to check markdown files and flag style issues.
-  Usage: cat <file> | mdl
+  Usage: mdl file or cat file | mdl
 grade: stable
 confinement: strict
 
 apps:
   mdl:
-    environment:
-      RUBYLIB: $SNAP/usr/lib/ruby/2.3.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/2.3.0
-      GEM_HOME: $SNAP/gems
-      GEM_PATH: $SNAP
-    command: ruby $SNAP/bin/mdl
+    command: mdl
+    plugs: [home, removable-media]
 
 parts:
   mdl.rb:
     source: https://github.com/markdownlint/markdownlint.git
     source-tag: v0.4.0
-    plugin: nil
+    plugin: ruby
     build: gem build mdl.gemspec
-    install: gem install mdl-*.gem -i $SNAPCRAFT_PART_INSTALL
-    build-packages: [gcc, make, ruby-dev]
-    stage-packages: [ruby]
+    install: gem install mdl-*.gem --env-shebang
