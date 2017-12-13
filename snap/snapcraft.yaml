@@ -1,5 +1,5 @@
 name: mdl
-version: "0.4.0"
+version: "v0.4.0"
 summary: Markdown lint tool
 description: |
   A tool to check markdown files and flag style issues.
