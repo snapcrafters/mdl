@@ -1,5 +1,6 @@
 name: mdl
-version: "v0.4.0"
+version: 'master'
+version-script: git -C parts/mdl/build describe --tags
 summary: Markdown lint tool
 description: |
   A tool to check markdown files and flag style issues.
@@ -15,7 +16,21 @@ apps:
 parts:
   mdl.rb:
     source: https://github.com/markdownlint/markdownlint.git
-    source-tag: v0.4.0
     plugin: ruby
     build: gem build mdl.gemspec
     install: gem install mdl-*.gem --env-shebang
+    override-build: |
+      last_committed_tag="$(git describe --tags --abbrev=0)"
+      last_released_tag="$(snap info mdl | awk '$1 == "beta:" { print $2 }')"
+      # If the latest tag from the upstream project has not been released to
+      # beta, build that tag instead of master.
+      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
+        git fetch
+        git checkout "${last_committed_tag}"
+        # XXX The snapcraft go plugin builds a link to the src dir, not to the
+        # build dir. That might be a bug, but let's better checkout both to be
+        # safe that we are not building the wrong thing. --elopio - 20171108
+        cd ../src
+        git checkout "${last_committed_tag}"
+      fi
+      snapcraftctl build
