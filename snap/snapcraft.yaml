@@ -1,12 +1,11 @@
 name: mdl
-version: 'master'
-version-script: git -C parts/mdl/build describe --tags
 summary: Markdown lint tool
 description: |
   A tool to check markdown files and flag style issues.
   Usage: mdl file or cat file | mdl
 grade: stable
 confinement: strict
+adopt-info: mdl.rb
 
 apps:
   mdl:
@@ -17,7 +16,9 @@ parts:
   mdl.rb:
     source: https://github.com/markdownlint/markdownlint.git
     plugin: ruby
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
+
       last_committed_tag="$(git describe --tags --abbrev=0)"
       last_released_tag="$(snap info mdl | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
@@ -26,5 +27,9 @@ parts:
         git fetch
         git checkout "${last_committed_tag}"
       fi
+      snapcraftctl set-version "$(git describe --tags)"
+    override-build: |
+      snapcraftctl build
+
       gem build mdl.gemspec
       gem install mdl-*.gem --env-shebang
