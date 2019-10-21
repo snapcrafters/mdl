@@ -5,7 +5,7 @@ description: |
   Usage: mdl file or cat file | mdl
 grade: stable
 confinement: strict
-adopt-info: mdl.rb
+adopt-info: mdl
 base: core18
 
 apps:
@@ -14,7 +14,7 @@ apps:
     plugs: [home, removable-media]
 
 parts:
-  mdl.rb:
+  mdl:
     source: https://github.com/markdownlint/markdownlint.git
     plugin: ruby
     override-pull: |
