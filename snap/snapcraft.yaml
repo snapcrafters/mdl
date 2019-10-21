@@ -6,6 +6,7 @@ description: |
 grade: stable
 confinement: strict
 adopt-info: mdl.rb
+base: core18
 
 apps:
   mdl:
