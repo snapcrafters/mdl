@@ -12,6 +12,8 @@ apps:
   mdl:
     command: mdl
     plugs: [home, removable-media]
+    environment:
+      LANG: C.UTF-8
 
 parts:
   mdl:
