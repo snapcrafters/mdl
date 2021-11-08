@@ -10,7 +10,7 @@ base: core18
 
 apps:
   mdl:
-    command: mdl
+    command: bin/mdl
     plugs: [home, removable-media]
     environment:
       LANG: C.UTF-8
@@ -19,6 +19,7 @@ parts:
   mdl:
     source: https://github.com/markdownlint/markdownlint.git
     plugin: ruby
+    ruby-version: '3.0.2'
     override-pull: |
       snapcraftctl pull
 
